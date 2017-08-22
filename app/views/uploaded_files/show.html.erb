@@ -1,0 +1,8 @@
+<strong>Name: </strong><%= @uploaded_file.name %><br>
+<strong>Desc: </strong><%= @uploaded_file.description %><br>
+<strong>User: </strong><%= @uploaded_file.user.username %><br>
+<strong>Type: </strong><%= @uploaded_file.file_type %><br>
+<strong>Size: </strong><%= number_to_human_size @uploaded_file.size %><br>
+<strong>Link: </strong><a href="/uploaded_files/<%= @uploaded_file.id %>/download">Download</a><br>
+<%= link_to 'Edit', edit_uploaded_file_path(@uploaded_file)%>
+<%= link_to 'Delete', uploaded_file_path(@uploaded_file), method: 'DELETE'%>

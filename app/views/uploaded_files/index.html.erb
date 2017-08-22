@@ -1,0 +1,5 @@
+<ul>
+  <% @uploaded_files.each do |file| %>
+    <li><%= link_to file.name, uploaded_file_path(file) %> by <%=file.user.username%></li>
+  <% end %>
+</ul>

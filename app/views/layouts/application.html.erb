@@ -2,11 +2,23 @@
 <html>
 <head>
   <title>RailsFileServer</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div style="border: 1px solid black;display: inline-block;padding: 5px;">
+    <%= link_to 'Browse Files', uploaded_files_path%>
+    <% if current_user %>
+      or <%= link_to 'Upload a File', new_uploaded_file_path%><br>
+      Current user: <%= current_user.username %><br>
+      <%= link_to 'Logout', destroy_user_session_path, method: 'DELETE' %>
+      or <%= link_to 'Delete Account', user_path(current_user), method: 'DELETE' %>
+    <% else %>
+      <br><%= link_to 'Login', new_user_session_path %> or
+      <%= link_to 'Signup', new_user_registration_path %>
+    <% end %>
+  </div><br>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
   <%= yield %>

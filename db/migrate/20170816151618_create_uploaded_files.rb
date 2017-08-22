@@ -5,7 +5,7 @@ class CreateUploadedFiles < ActiveRecord::Migration
       t.string :description
       t.integer :size
       t.integer :user_id
-      t.string :type
+      t.string :file_type
 
       t.timestamps null: false
     end

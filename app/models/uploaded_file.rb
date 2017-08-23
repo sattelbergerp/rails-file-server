@@ -16,7 +16,7 @@ class UploadedFile < ActiveRecord::Base
   end
 
   def related
-    UploadedFile.where.not(id: id).joins(:tags).where('tags.name' => ['image', 'jpg', 'background']).group(:id).order('COUNT(uploaded_files.id) DESC')
+    UploadedFile.where.not(id: id).joins(:tags).where('tags.name' => tags.collect{ |t| t.name }).group(:id).order('COUNT(uploaded_files.id) DESC')
   end
 
 end

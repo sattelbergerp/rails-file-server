@@ -1,3 +1,4 @@
+<div class="monospace">
 <strong>Name: </strong><%= @uploaded_file.name %><br>
 <strong>Desc: </strong><%= @uploaded_file.description %><br>
 <strong>User: </strong><%= @uploaded_file.user.username %><br>
@@ -6,14 +7,16 @@
 <strong>Link: </strong><a href="/uploaded_files/<%= @uploaded_file.id %>/download">Download</a><br>
 <strong>Tags: </strong>
 <% @uploaded_file.tags.each do |tag, index| %>
-  <%= tag.name %><%= ', ' unless tag==@uploaded_file.tags.last%>
+  <%= tag.name %>, 
 <% end %>
 <br>
 <strong>Like: </strong>
 <% @uploaded_file.related.each_with_index do |f, index| %>
-  <%= link_to f.name, uploaded_file_path(f) %><%= ', ' unless f==@uploaded_file.related.last%>
+  <%= link_to f.name, uploaded_file_path(f) %>,
 <% end %><br>
 <% if @uploaded_file.user == current_user %>
+  <strong>Ctrl: </strong>
   <%= link_to 'Edit', edit_uploaded_file_path(@uploaded_file)%>
   <%= link_to 'Delete', uploaded_file_path(@uploaded_file), method: 'DELETE'%>
 <% end %>
+</div>

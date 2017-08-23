@@ -1,16 +1,19 @@
 class UploadedFilesController < ApplicationController
 
-  before_action :set_uploaded_file, only: [:show, :download, :edit, :update, :destroy]
+  before_action :set_uploaded_file, only: [:show, :download]
+  before_action :set_uploaded_file_for_modify, only: [:edit, :update, :destroy]
 
   def index
     @uploaded_files = UploadedFile.all
   end
 
   def new
+    render status: 403, text: 'You must create an account to upload files' if !current_user
     @uploaded_file = UploadedFile.new
   end
 
   def create
+    render status: 403, text: 'You must create an account to upload files' if !current_user
     @uploaded_file = current_user.uploaded_files.build(description: params[:uploaded_file][:description])
     file = params[:uploaded_file][:file]
     @uploaded_file.file_type = file.content_type
@@ -44,6 +47,12 @@ class UploadedFilesController < ApplicationController
   private
   def set_uploaded_file
     @uploaded_file = UploadedFile.find_by(id: params[:id])
+  end
+
+  def set_uploaded_file_for_modify
+    @uploaded_file = UploadedFile.find_by(id: params[:id])
+    @uploaded_file = nil if @uploaded_file.user != current_user
+    render status: 404, text: "Not Found" if !@uploaded_file
   end
 
 end

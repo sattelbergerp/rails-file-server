@@ -4,6 +4,11 @@
 <strong>Type: </strong><%= @uploaded_file.file_type %><br>
 <strong>Size: </strong><%= number_to_human_size @uploaded_file.size %><br>
 <strong>Link: </strong><a href="/uploaded_files/<%= @uploaded_file.id %>/download">Download</a><br>
+<strong>Tags: </strong>
+<% @uploaded_file.tags.each do |tag, index| %>
+  <%= tag.name %>,
+<% end %>
+<br>
 <% if @uploaded_file.user == current_user %>
   <%= link_to 'Edit', edit_uploaded_file_path(@uploaded_file)%>
   <%= link_to 'Delete', uploaded_file_path(@uploaded_file), method: 'DELETE'%>

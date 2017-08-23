@@ -1,6 +1,8 @@
 <%= form_for @uploaded_file do |f| %>
   <%= f.label :file %><br>
   <%= f.file_field :file %><br>
+  <%= f.label :tags_str, 'Tags' %><br>
+  <%= f.text_area :tags_str %><br>
   <%= f.label :description %><br>
   <%= f.text_area :description %><br>
   <br><%= f.submit "Upload File"%>

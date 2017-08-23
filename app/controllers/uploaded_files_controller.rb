@@ -14,7 +14,7 @@ class UploadedFilesController < ApplicationController
 
   def create
     render status: 403, text: 'You must create an account to upload files' if !current_user
-    @uploaded_file = current_user.uploaded_files.build(description: params[:uploaded_file][:description])
+    @uploaded_file = current_user.uploaded_files.build(uploaded_file_params)
     file = params[:uploaded_file][:file]
     @uploaded_file.file_type = file.content_type
     @uploaded_file.size = file.size
@@ -30,7 +30,7 @@ class UploadedFilesController < ApplicationController
   end
 
   def update
-    @uploaded_file.update(description: params[:uploaded_file][:description])
+    @uploaded_file.update(uploaded_file_params)
     redirect_to uploaded_file_path(@uploaded_file)
   end
 
@@ -45,6 +45,9 @@ class UploadedFilesController < ApplicationController
   end
 
   private
+  def uploaded_file_params
+    params.require(:uploaded_file).permit(:tags_str, :description)
+  end
   def set_uploaded_file
     @uploaded_file = UploadedFile.find_by(id: params[:id])
   end

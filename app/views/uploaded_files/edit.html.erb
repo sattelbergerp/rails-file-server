@@ -1,4 +1,6 @@
 <%= form_for @uploaded_file do |f| %>
+  <%= f.label :tags_str, 'Tags' %><br>
+  <%= f.text_area :tags_str %><br>
   <%= f.label :description %><br>
   <%= f.text_area :description %><br>
   <br><%= f.submit "Save"%>

@@ -7,7 +7,7 @@
 <strong>Link: </strong><a href="/uploaded_files/<%= @uploaded_file.id %>/download">Download</a><br>
 <strong>Tags: </strong>
 <% @uploaded_file.tags.each do |tag, index| %>
-  <%= tag.name %>, 
+  <%= tag.name %>,
 <% end %>
 <br>
 <strong>Like: </strong>
@@ -19,4 +19,6 @@
   <%= link_to 'Edit', edit_uploaded_file_path(@uploaded_file)%>
   <%= link_to 'Delete', uploaded_file_path(@uploaded_file), method: 'DELETE'%>
 <% end %>
+<p>Comments</p>
+<%= render @uploaded_file.comments.best %>
 </div>

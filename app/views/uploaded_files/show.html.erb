@@ -19,6 +19,17 @@
   <%= link_to 'Edit', edit_uploaded_file_path(@uploaded_file)%>
   <%= link_to 'Delete', uploaded_file_path(@uploaded_file), method: 'DELETE'%>
 <% end %>
-<p>Comments</p>
-<%= render @uploaded_file.comments.best %>
+<p>Comments (<%= @uploaded_file.comments.count %>) <span style="float:right;" id="load-dbg">Loading</span></p>
+<div id='comments'>
+  <div class="loading"></div>
+</div>
+<script>
+  $(()=>{
+    var cStart = performance.now();
+    $.get('/uploaded_files/<%= @uploaded_file.id %>/comments', (data)=>{
+      renderComments(data)
+      document.getElementById('load-dbg').innerHTML = Math.floor(performance.now()-cStart) + "ms";
+    });
+});
+</script>
 </div>

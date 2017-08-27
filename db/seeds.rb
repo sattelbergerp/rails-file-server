@@ -9,7 +9,7 @@ class CommentGenerator
   def initialize
     @r = Random.new
     @count = 0
-    @max = 1000
+    @max = 10000
     @user = User.first
     @file = UploadedFile.first
   end
@@ -27,6 +27,8 @@ class CommentGenerator
     end
   end
 end
+
+Comment.delete_all
 
 CommentGenerator.new.genComment()
 puts ""
